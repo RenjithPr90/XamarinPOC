@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:MultiSelectListDemo.ViewModel;assembly=MultiSelectListDemo"
+             x:Class="MultiSelectListDemo.Views.CustomListDemo">
+	<ContentPage.BindingContext>
+		<viewModel:CustomListDemoViewModel/>
+	</ContentPage.BindingContext>
+	<Grid>
+		<StackLayout Padding="20" HorizontalOptions="Center" VerticalOptions="Center" Spacing="20" >
+			<Frame HasShadow="True" OutlineColor="Gray" Padding="2" BackgroundColor="#33000000">
+				<StackLayout BackgroundColor="#4d2e00" Padding="10">
+					<Label Text="Multi Select ListView" TextColor="White"
+						   HorizontalOptions="Center" FontSize="24"></Label>
+				</StackLayout>
+			</Frame>
+			<Frame HasShadow="True" OutlineColor="Gray" Padding="2">
+				<StackLayout Spacing="10" Padding="20" >
+					<Label Text="Select your Preference" TextColor="#4d2e00" FontSize="16"
+						   HorizontalOptions="Center"/>
+					<BoxView BackgroundColor="#22000000" HeightRequest="2"/>
+					<ListView x:Name="ListViewName" Margin="0,5,0,5"
+							  HasUnevenRows="True"
+							  SeparatorColor="Transparent"
+							  CachingStrategy="RecycleElement"
+							  ItemsSource="{Binding WrappedCusines}" HeightRequest="400">
+						<ListView.ItemTemplate>
+							<DataTemplate>
+								<ViewCell>
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="30"/>
+											<ColumnDefinition Width="*"/>
+										</Grid.ColumnDefinitions>
+										<Image Grid.Column="0" Source="Checked.png" Margin="5"
+											   IsVisible="{Binding IsChecked}"/>
+										<Image Grid.Column="0" Source="Unchecked.png" Margin="5"
+											   IsVisible="{Binding UnChecked}"/>
+										<Label Grid.Column="1"  Margin="10" FontSize="17" 
+											   Text="{Binding Item.Name}"
+											   TextColor="{Binding ActiveColor}"/>
+									</Grid>
+								</ViewCell>
+							</DataTemplate>
+						</ListView.ItemTemplate>
+					</ListView>
+				</StackLayout>
+			</Frame>
+		</StackLayout>
+	</Grid>
+</ContentPage>
